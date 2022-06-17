@@ -1,10 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
+  "short_name": "Finmod.id",
+  "name": "Finmod.id is an online valuation and Financial Modelling platform for startups and SMEs. It's quicker and more cost effective than traditional services.",
+  "icons": [{
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
