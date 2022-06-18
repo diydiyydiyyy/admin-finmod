@@ -1,0 +1,15 @@
+.navbar,
+.offcanvas {
+	background-color: #e5f6fd;
+}
+
+.menus {
+	background-color: #487df5;
+	padding: 5px;
+	margin-bottom: 10px;
+	color: #e5f6fd;
+}
+
+.menus:hover {
+	background-color: #295ac9;
+}

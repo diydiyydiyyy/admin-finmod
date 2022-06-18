@@ -11,3 +11,18 @@ body {
 a {
 	text-decoration: none !important;
 }
+
+.centered {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.btn-primary {
+	background-color: #487df5;
+}
+
+.btn-primary:hover {
+	background-color: #295ac9;
+}
