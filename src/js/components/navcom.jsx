@@ -46,7 +46,9 @@ function NavCom() {
 									<Navbar.Brand>Finmod.id</Navbar.Brand>
 								</Link>
 								<Navbar.Collapse className="justify-content-end">
-									<NavDropdown title={`${username}`}>
+									<NavDropdown
+										title={`${username}`}
+										className="dropdown-menu-end">
 										<NavDropdown.Item onClick={handleShowModal}>
 											Logout
 										</NavDropdown.Item>

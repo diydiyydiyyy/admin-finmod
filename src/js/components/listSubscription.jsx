@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
 import { CSVLink } from 'react-csv';
 
 function ListSubscription() {
 	const [subscription, setSubscription] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		getAllSubscription();
@@ -20,6 +21,7 @@ function ListSubscription() {
 	]);
 
 	const getAllSubscription = async () => {
+		setLoading(true);
 		const urlApi = 'https://finmod-server-api.herokuapp.com/subscription';
 		const token = localStorage.getItem('token');
 		const config = {
@@ -27,9 +29,14 @@ function ListSubscription() {
 				Authorization: `Bearer ${token}`,
 			},
 		};
-		const response = await axios.get(urlApi, config);
-		setSubscription(response.data);
-		console.log(subscription);
+		try {
+			const response = await axios.get(urlApi, config);
+			setSubscription(response.data);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	const deleteSubscription = async (id) => {
@@ -76,7 +83,11 @@ function ListSubscription() {
 					{!subscription[0] ? (
 						<tr>
 							<td colSpan={4} className="text-center py-5">
-								Nothing record to display
+								{loading ? (
+									<Spinner animation="border" variant="primary" />
+								) : (
+									<>Nothing record to display</>
+								)}
 							</td>
 						</tr>
 					) : (
