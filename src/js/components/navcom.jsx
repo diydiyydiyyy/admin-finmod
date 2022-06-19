@@ -107,7 +107,10 @@ function NavCom() {
 										</div>
 									</div>
 								</Link>
-								<a href="/" target="_blank" rel="noopener noreferrer">
+								<a
+									href="https://finmod-app.vercel.app/"
+									target="_blank"
+									rel="noopener noreferrer">
 									<div className="menu-side" onClick={handleClose}>
 										<div className="menus">
 											<i
