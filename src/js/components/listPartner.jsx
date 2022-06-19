@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function ListPartner() {
 	const [partner, setPartner] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		getAllPartner();
 	}, []);
 
 	const getAllPartner = async () => {
+		setLoading(true);
 		const urlApi = 'https://finmod-server-api.herokuapp.com/partner';
-		const response = await axios.get(urlApi);
-		setPartner(response.data);
-		console.log(partner);
+		try {
+			const response = await axios.get(urlApi);
+			setPartner(response.data);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	const deletePartner = async (id) => {
@@ -50,7 +57,11 @@ function ListPartner() {
 					{!partner[0] ? (
 						<tr>
 							<td colSpan={4} className="text-center py-5">
-								Nothing record to display
+								{loading ? (
+									<Spinner animation="border" variant="primary" />
+								) : (
+									<>Nothing record to display</>
+								)}
 							</td>
 						</tr>
 					) : (

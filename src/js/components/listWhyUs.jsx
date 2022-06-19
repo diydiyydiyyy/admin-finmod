@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function ListWhyUs() {
 	const [whyus, setWhyUs] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		getAllWhyUs();
 	}, []);
 
 	const getAllWhyUs = async () => {
+		setLoading(true);
 		const urlApi = 'https://finmod-server-api.herokuapp.com/whyus';
-		const response = await axios.get(urlApi);
-		setWhyUs(response.data);
+		try {
+			const response = await axios.get(urlApi);
+			setWhyUs(response.data);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	const deleteWhyUs = async (id) => {
@@ -50,7 +58,11 @@ function ListWhyUs() {
 					{!whyus[0] ? (
 						<tr>
 							<td colSpan={4} className="text-center py-5">
-								Nothing record to display
+								{loading ? (
+									<Spinner animation="border" variant="primary" />
+								) : (
+									<>Nothing record to display</>
+								)}
 							</td>
 						</tr>
 					) : (
