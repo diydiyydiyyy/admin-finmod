@@ -35,7 +35,11 @@ function Login() {
 					setMsg(error.response.data.msg);
 				}
 			})
-			.finally(() => setLoading(false));
+			.finally(() => {
+				setLoading(false);
+				setEmail('');
+				setPassword('');
+			});
 	};
 
 	function returnLogin() {
